@@ -2,6 +2,10 @@ public class EventCreateWrapper {
 	public cls_event event;
 
 	class cls_event {
+		public cls_name name;
+		public cls_description description;
+		public cls_start start;
+		public cls_end ends;
 		public String currencys;
 		//USD
 		public Boolean online_event;
@@ -22,5 +26,25 @@ public class EventCreateWrapper {
 		public Boolean show_colors_in_seatmap_thumbnail;
 		public String locale;
 		//de_AT
+	}
+
+	class cls_name {
+		public String html;
+	}
+
+	class cls_description {
+		public String html;
+	}
+
+	class cls_start {
+		public String timezone;
+		public String utc;
+		//2018-05-12T02:00:00Z
+	}
+
+	class cls_end {
+		public String timezone;
+		public String utc;
+		//2018-05-12T02:00:00Z
 	}
 }
