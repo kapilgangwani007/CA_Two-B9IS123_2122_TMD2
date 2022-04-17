@@ -1,3 +1,143 @@
 <template>
- 
+ <lightning-card>
+     <div class="slds-text-heading_large slds-align_absolute-center">Get an Event Details</div><br/><br/>
+        <div class="slds-p-horizontal_medium textAlign">
+            <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-6">
+                        <lightning-input type="text" label="Enter Event Id:" value={eventId} onchange={handleEventIdChange}></lightning-input>
+                    </div>
+                <template if:true={eventId}>
+                    <div class="slds-col slds-size_1-of-6" style="margin-top: 5px;">
+                        <br/>
+                        <lightning-button variant="Success" label="Get Event Details"
+                         title="Get Event Details" icon-name="utility:search" 
+                         icon-position="right" onclick={handleEventSearch} ></lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6" style="margin-top: 5px;">
+                        <br/><lightning-button variant="destructive" style="margin-left: -67px;" label="Reset" title="Reset Filters" icon-name="utility:refresh" icon-position="right" onclick={resetAll} ></lightning-button>
+                    </div>
+                    </template>
+                    <template if:false={isEventAvailable}>
+                        <div class="slds-col slds-size_9-of-12" style="margin-top: 5px;margin-left: 10%;">
+                            <p><b>Some Events from Eventbrite</b></p>
+                            <table class="tabeset">
+                                <thead>
+                                    <tr>
+                                        <th>Event Id</th>
+                                        <th>Event Name</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <template for:each={samplesEvent} for:item="evnt">
+                                        <tr key={evnt.value}>
+                                            <td>{evnt.value}</td>
+                                            <td>{evnt.label}</td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+            </div>
+        </div>
+     <template if:true={isEventAvailable}>
+             <div class="slds-grid slds-gutters">
+                    <div class="slds-p-horizontal_medium slds-col slds-size_6-of-12 eventset textAlign">
+                        <div class="slds-card">
+                            <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="Event Details">
+                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Event Details</span>
+                                </span>
+                                </div>
+                                <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span>Event Details</span>
+                                
+                                </h2>
+                                </div>
+                            </header>
+                            </div>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Event Id:</b> <lightning-formatted-text value={eventDetails.eventId} ></lightning-formatted-text></p>
+                                    <p class=""><b>Event Name:</b><lightning-formatted-rich-text value={eventDetails.eventName}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Event Id:</b> <lightning-formatted-text value={eventDetails.eventId} ></lightning-formatted-text></p>
+                                    <p class=""><b>Venue Id:</b><lightning-formatted-text value={eventDetails.eventName}></lightning-formatted-text></p>
+                                    <p class=""><b>Organization Id:</b><lightning-formatted-text value={eventDetails.venue_id}></lightning-formatted-text></p>
+                                    <p class=""><b>Description:</b><lightning-formatted-rich-text value={eventDetails.description}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Event Status:</b><lightning-formatted-text value={eventDetails.status}></lightning-formatted-text></p>
+                                    <p class=""><b>Currency:</b><lightning-formatted-text value={eventDetails.currencys}></lightning-formatted-text></p>
+                                    <p class=""><b>Summary:</b><lightning-formatted-rich-text value={eventDetails.summary}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Start Time:</b><lightning-formatted-text value={eventDetails.startTime}></lightning-formatted-text></p>
+                                    <p class=""><b>End Time:</b><lightning-formatted-text value={eventDetails.endTime}></lightning-formatted-text></p>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 textAlign">   
+                        <h2 class="slds-card__header-title">
+                    <span><b>API Details</b></span>
+                </h2>
+                        <lightning-accordion class="example-accordion"
+                        active-section-name="A">
+                        <lightning-accordion-section name="A" label="API Request">
+                          <div class="slds-card">
+                            <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">API Request</span>
+                                </span>
+                                </div>
+                                <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span>API Request</span>
+                                </h2>
+                                </div>
+                            </header>
+                            </div>
+                            <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                <p class=""><b>Endpoint URL:</b><lightning-formatted-rich-text value={eventDetails.apiEndpointURL}></lightning-formatted-rich-text></p>
+                                <p class=""><b>Method:</b> <lightning-formatted-text value={eventDetails.apiMethod}></lightning-formatted-text></p>
+                                <p class=""><b>Request:</b> <lightning-formatted-rich-text value={eventDetails.apiRequest}></lightning-formatted-rich-text></p>
+                            </div>
+                        </div>  
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="B" label="API Response">
+                          <div class="slds-card">
+                            <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">API Response</span>
+                                </span>
+                                </div>
+                                <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span>API Response</span>
+                                </h2>
+                                </div>
+                            </header>
+                            </div>
+                            <div class="slds-p-horizontal_medium slds-card__body slds-card__body_inner">
+                                <p class=""><b>Status Code:</b> <lightning-formatted-text value={eventDetails.apiStatusCode}></lightning-formatted-text></p>
+                                <p class=""><b>Response:</b><lightning-formatted-rich-text value={eventDetails.apiResponse}></lightning-formatted-rich-text></p>
+                            </div>
+                        </div>  
+                        </lightning-accordion-section>
+                        </lightning-accordion>
+                     </div>
+             </div>
+             </template>
+ </lightning-card>
 </template>
