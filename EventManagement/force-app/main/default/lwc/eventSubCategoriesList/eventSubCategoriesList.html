@@ -1,0 +1,84 @@
+<template>
+    <lightning-card>
+        <div class="slds-text-heading_large slds-align_absolute-center">List of Sub Category Events</div><br/><br/>
+        <div class="slds-p-horizontal_medium textAlign">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning-datatable
+                        key-field="id"
+                        data={tableData}
+                        columns={columns}
+                        show-row-number-column
+                        hide-checkbox-column
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirection}
+                        sorted-by={sortedBy}
+                        onsort={onHandleSort}>
+					</lightning-datatable>
+                </div>
+            </div>
+            </br>
+     
+			<template if:true={isEventAvailable}>
+				<div class="slds-card">
+                    <h2 class="slds-p-horizontal_medium slds-p-top_x-small slds-card__header-title">
+                        <span><b>Subcategory Event API Details</b></span>
+                    </h2>
+                    <lightning-accordion class="example-accordion" active-section-name="A">
+                        <lightning-accordion-section name="A" label="API Request">
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Request</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Request</span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Endpoint URL:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiEndpointURL}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Method:</b> <lightning-formatted-text value={subcategoriesDetails.apiMethod}></lightning-formatted-text></p>
+                                    <p class=""><b>Request:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiRequest}></lightning-formatted-rich-text></p>
+                                </div>
+                            </div>  
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="B" label="API Response">
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Response</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Response</span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Status Code:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiStatusCode}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Response:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiResponse}></lightning-formatted-rich-text></p>
+                                </div>
+                            </div>  
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+</template>
