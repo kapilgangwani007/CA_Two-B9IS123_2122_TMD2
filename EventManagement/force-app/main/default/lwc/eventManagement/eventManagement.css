@@ -1,3 +1,34 @@
-.dummy{
-	color : black;
+.textAlign{
+	line-height: 25px;
+}
+
+.slds-card {
+	border: var(--slds-c-card-sizing-border,var(--sds-c-card-sizing-border,1px)) solid var(--slds-c-card-color-border,var(--sds-c-card-color-border,#c9c9c9));
+    border-radius: var(--slds-c-card-radius-border,var(--sds-c-card-radius-border,.25rem));
+}
+
+.eventset{
+	padding-top: 30px;
+	padding-left: 28px;
+}
+
+table.tabeset {
+  width: 50%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #c8291e;
+  border-style: solid;
+  color: #000000;
+}
+
+table.tabeset td, table.tabeset th {
+  border-width: 2px;
+  border-color: #c8291e;
+  border-style: solid;
+  padding: 2px;
+}
+
+table.tabeset thead {
+  background-color: #af18cd;
 }
