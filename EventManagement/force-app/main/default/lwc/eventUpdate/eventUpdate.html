@@ -1,0 +1,51 @@
+<template>
+<lightning-card>
+     <div class="slds-text-heading_large slds-align_absolute-center">Update an Event</div><br/><br/>
+        <div class="slds-p-horizontal_medium textAlign">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2">  
+                    <lightning-input name="EventId" class="verify" type="text" label="Event Id (To Update Event Only):" value={eventId} onchange={handleEventIdChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2" style="margin-top: 24px;">  
+                    <lightning-button variant="brand-outline" label="Get Event Details"  onclick={handleEventDetails} title="Get Event Details" icon-name="utility:search" class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input name="EventName" class="verify" type="text" required label="Event Name:" value={eventName} onchange={handleEventNameChange}></lightning-input>
+                    <lightning-input name="StartTime" class="verify" required type="datetime" label="Start Time:" value={startDateTime} onchange={handleEventStartTimeChange}></lightning-input>
+                    <lightning-input name="Capacity" class="verify" required type="number" label="Capacity:" value={capacity} onchange={handleEventCapacityChange}></lightning-input>
+                    <lightning-textarea name="EventDescription" class="verify" required type="text" label="Event Description:" value={eventDescription} onchange={handleEventDesChange}></lightning-textarea>
+                    <lightning-input name="IsReservedSeating"  type="checkbox" label="Is Reserved Seating:" onchange={handleEventSeatChange}></lightning-input>
+                    <lightning-input name="IsSeries" type="checkbox" label="Is Series:" onchange={handleEventSeriesChange}></lightning-input>
+                    <lightning-input name="ShowPickaSeat" type="checkbox" label="Show Pick a Seat:" onchange={handleEventSelectSeatChange}></lightning-input>
+                    <lightning-input name="ShowSeatmapThumbnail" type="checkbox" label="Show Seatmap Thumbnail:" onchange={handleEventSeatMapChange}></lightning-input>
+                    <lightning-input name="ShowColorsInSeatmapThumbnail" type="checkbox" label="Show Colors In Seatmap Thumbnail:"  onchange={handleEventColorChange}></lightning-input>
+                    <lightning-input name="ShowRemaining" type="checkbox" label="Show Remaining:" checked onchange={handleEventRemaningChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input name="Currency" class="verify" required type="text" label="Currency (USD):" value={currency} onchange={handleEventCurrencyChange}></lightning-input>
+                    <lightning-input name="Locale" class="verify" required type="text" label="Locale (de_AT):" value={locale} onchange={handleEventLocaleChange}></lightning-input>
+                    <lightning-input name="EndTime" class="verify" required type="datetime" label="End Time:" value={endDateTime} onchange={handleEventEndTimeChange}></lightning-input>
+                    <lightning-input name="Password" class="verify" type="text" label="Password:" value={password} onchange={handleEventPasswordChange}></lightning-input>
+                    <lightning-input name="OrgnizerId" type="text" label="Orgnizer Id (45462715823):" value={organizerId} onchange={handleEventOrgnizerChange}></lightning-input>
+                    <lightning-input name="OnlineEvent" type="checkbox" label="Online Event:"  onchange={handleEventOnlineChange}></lightning-input>
+                    <lightning-input name="Listed" type="checkbox" label="Listed:"  onchange={handleEventListedChange}></lightning-input>
+                    <lightning-input name="Shareable" type="checkbox" label="Shareable:" onchange={handleEventShareableChange}></lightning-input>
+                    <lightning-input name="InviteOnly" type="checkbox" label="Invite Only:" onchange={handleEventInviteChange}></lightning-input>
+                    </div>
+            </div></br>
+            <div class="slds-align_absolute-center">
+                <div class="slds-grid slds-wrap ">
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-button class="buttonset" variant="Success" label="Update Event"
+                        title="Update Event Details" icon-name="utility:record_create" 
+                        icon-position="right" onclick={handleUpdateEvent} ></lightning-button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </lightning-card>
+</template>
