@@ -5,4 +5,7 @@
 # Private token : XZF6XPYXRASKPB2RPTU3
 # Public token : WSJMBDTME56R246AJKKF
 # API Site: https://www.eventbrite.com/platform/api
-
+# Please follow this path to see the components: 
+EventManagement --> force-app --> main --> default --> 
+1. Classes
+2. LWC components (HTML,CSS,JS)
