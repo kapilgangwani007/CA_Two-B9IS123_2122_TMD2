@@ -66,7 +66,125 @@ public class cls_description {
       public String text; //Some text
       public String html; //<p>Some text</p>
  }
- public class cls_ticket_availability {
+public class cls_start {
+      public String timezone; //America/Los_Angeles
+      public String utc; //2018-05-12T02:00:00Z
+      public String local; //2018-05-11T19:00:00
+ }
+public class cls_end {
+      public String timezone; //America/Los_Angeles
+      public String utc; //2018-05-12T02:00:00Z
+      public String local; //2018-05-11T19:00:00
+ }
+public class cls_organizer {
+      public String name; //
+      public cls_description description;
+      public cls_long_description long_description;
+      public String logo_id;
+      public cls_logo logo;
+      public String resource_uri; //https://www.eventbriteapi.com/v3/organizers/12345/
+      public String id; //12345
+      public String url; //https://www.eventbrite.com/o/12345/
+      public Integer num_past_events;    //5
+      public Integer num_future_events;    //1
+      public String twitter; //@abc
+      public String facebook; //abc
+ }
+public class cls_long_description {
+      public String text; //Some text
+      public String html; //<p>Some text</p>
+ }
+
+public class cls_logo {
+      public String id; //12345
+      public String url; //https://image.com
+      public cls_crop_mask crop_mask;
+      public cls_original original;
+      public String aspect_ratio; //2
+      public String edge_color; //#6a7c8b
+      public Boolean edge_color_set;
+ }
+public class cls_crop_mask {
+      public cls_top_left top_left;
+      public Integer width;    //15
+      public Integer height;    //15
+ }
+public class cls_top_left {
+      public Integer y;    //15
+      public Integer x;    //15
+ }
+public class cls_original {
+      public String url; //https://image.com
+      public Integer width;    //800
+      public Integer height;    //400
+ }
+public class cls_venue {
+      public String name; //Great Venue
+      public String age_restriction;
+      public Integer capacity;    //100
+      public cls_address address;
+      public String resource_uri; //https://www.eventbriteapi.com/v3/venues/3003/
+      public String id; //3003
+      public String latitude; //49.28497549999999
+      public String longitude; //123.11082529999999
+ }
+
+public class cls_address {
+      public String address_1;
+      public String address_2;
+      public String city;
+      public String region;
+      public String postal_code;
+      public String country;
+      public Double latitude;
+      public Double longitude;
+ }
+
+
+public class cls_format {
+      public String id; //2
+      public String name; //Seminar or Talk
+      public String name_localized; //Seminar or Talk
+      public String short_name; //Seminar
+      public String short_name_localized; //Seminar
+      public String resource_uri; //https://www.eventbriteapi.com/v3/formats/2/
+ }
+public class cls_category {
+      public String id; //103
+      public String resource_uri; //https://www.eventbriteapi.com/v3/categories/103/
+      public String name; //Music
+      public String name_localized; //Music
+      public String short_name; //Music
+      public String short_name_localized; //Music
+      public List<cls_subcategories> subcategories;
+ }
+public class cls_subcategories {
+ }
+public class cls_parent_category {
+      public String id; //103
+      public String resource_uri; //https://www.eventbriteapi.com/v3/categories/103/
+      public String name; //Music
+      public String name_localized; //Music
+      public String short_name; //Music
+      public String short_name_localized; //Music
+      public List<cls_subcategories> subcategories;
+ }
+public class cls_subcategory {
+      public String id; //3003
+      public String resource_uri; //https://www.eventbriteapi.com/v3/subcategories/3003/
+      public String name; //Classical
+      public cls_parent_category parent_category;
+ }
+public class cls_music_properties {
+      public String age_restriction;
+      public String presented_by;
+      public String door_time; //2019-05-12T-19:00:00Z
+ }
+
+public class cls_bookmark_info {
+      public Boolean bookmarked;
+ }
+public class cls_ticket_availability {
       public Boolean has_available_tickets;
       public cls_minimum_ticket_price minimum_ticket_price;
       public cls_maximum_ticket_price maximum_ticket_price;
@@ -116,33 +234,5 @@ public class cls_checkout_settings {
  public class cls_offline_settings {
       public String payment_method; //CASH
       public String instructions; //
- }
-public class cls_start {
-      public String timezone; //America/Los_Angeles
-      public String utc; //2018-05-12T02:00:00Z
-      public String local; //2018-05-11T19:00:00
- }
-public class cls_end {
-      public String timezone; //America/Los_Angeles
-      public String utc; //2018-05-12T02:00:00Z
-      public String local; //2018-05-11T19:00:00
- }
-public class cls_organizer {
-      public String name; //
-      public cls_description description;
-      public cls_long_description long_description;
-      public String logo_id;
-      public cls_logo logo;
-      public String resource_uri; //https://www.eventbriteapi.com/v3/organizers/12345/
-      public String id; //12345
-      public String url; //https://www.eventbrite.com/o/12345/
-      public Integer num_past_events;    //5
-      public Integer num_future_events;    //1
-      public String twitter; //@abc
-      public String facebook; //abc
- }
-public class cls_long_description {
-      public String text; //Some text
-      public String html; //<p>Some text</p>
  }
 }
