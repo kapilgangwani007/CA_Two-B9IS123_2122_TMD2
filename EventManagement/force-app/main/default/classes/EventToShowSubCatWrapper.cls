@@ -1,7 +1,6 @@
 /* 
 * This class is used as a wrapper class to store the data getting from response of subcategories and showing sending it in UI
 */
-// wrapper class to show sub categories response in UI converting String to Object
 public class EventToShowSubCatWrapper {
     public String apiResponse;
     public String apiEndpointURL;
