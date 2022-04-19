@@ -1,46 +1,56 @@
+/* 
+* This class is used to perform integration of GET method with eventbrite site to get event details as response of request event Id.
+*/
+
+//Creating a class to perform integration
 public class EventManagementController {
-    
-    @AuraEnabled
+	
+    @AuraEnabled //anotation used in salesforce to send data in UI
+	//Method to get event details
     public static String getEventById(String eventId) {
         String eventDetails = '';
         EventWrapper eventObj = new EventWrapper();
+		
+		// wrapper class to store the data which will be shown in UI
         EventShowWrapper toShowInUI = new EventShowWrapper();
+		
+		//try catch to catch exception
         try{
+			
+			//Creating endpiont URL
+			// Taken from https://www.eventbrite.com/platform/api#/reference/event/retrieve-an-event?console=1
             String url = 'https://www.eventbriteapi.com/v3/events/';
             String apiKey = 'XZF6XPYXRASKPB2RPTU3'; //Eventbrite API Key
             String apiURL = '/?token=';
             String apiStatusCode = '';
             String apiRequest = '';
             String endpointURL =  url + eventId + apiURL + apiKey;
-            System.debug('endpointURL::' + endpointURL);
+			
             Http http = new Http();
             // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
             HttpRequest req = new HttpRequest();
+            req.setHeader('Authorization', 'Bearer XZF6XPYXRASKPB2RPTU3');
+            req.setHeader('Accept', 'application/json');
+            req.setHeader('Content-Type','application/json;charset=UTF-8');
             req.setEndpoint(endpointURL);
             req.setMethod('GET');
             apiRequest = req.toString();
+			
             // Send the request, and return a response
             HttpResponse res = http.send(req);
             apiStatusCode = String.valueOf(res.getStatusCode());
+			
+            // logic when success response received
             if(res.getStatusCode() == 200){
-                //JSONResponse = res.getBody();
-                String htmltagremove = res.getBody().substringAfter('<pre><code class="language-json">');
-                String entityremove = htmltagremove.substringBefore('</code></pre>').replaceAll('&quot;','"');
-                System.debug('@@@entityremove'+entityremove);
-                String unwantedURL ='"<a href="https://www.eventbriteapi.com/v3/events/'+eventId+'/?token=XZF6XPYXRASKPB2RPTU3">https://www.eventbriteapi.com/v3/events/'+eventId+'/</a>"';
-                System.debug('@@@unwantedURL'+unwantedURL);
-                
-                eventDetails = entityremove.replace(unwantedURL,'""');
-                String toShowResponse = eventDetails.replace('end', 'ends').replace('currency', 'currencys');
-                
+               String toShowResponse = res.getBody().replace('end', 'ends').replace('currency', 'currencys');
                 eventObj = (EventWrapper)System.JSON.deserialize(toShowResponse, EventWrapper.class);
-                System.debug('@@eventObj::' + eventObj);
-                
+				//Storing data in wrapper
                 EventWrapper.cls_name nameDetails = eventObj.name;
                 EventWrapper.cls_description descriptionDetails = eventObj.description;
                 EventWrapper.cls_start startTiming = eventObj.start;
                 EventWrapper.cls_end endTiming = eventObj.ends;
                 
+				// Creating record in Salesforce with the response data
                 Event_Management__c eve = new Event_Management__c();
                 eve.API_Response__c = eventDetails;
                 eve.JSON_To_Object_Response__c = JSON.serialize(eventObj);
@@ -58,6 +68,7 @@ public class EventManagementController {
                 eve.Event_Description__c = descriptionDetails.text;
                 insert eve;
                 
+				// Storing data to show it in UI
                 toShowInUI.eventName = nameDetails.text;
                 toShowInUI.description = descriptionDetails.text;
                 toShowInUI.startTime = startTiming.local;
@@ -76,17 +87,18 @@ public class EventManagementController {
                 toShowInUI.apiRequest = apiRequest;
                 
             }else{
+				// If not success response then to show only error response
                 toShowInUI.apiResponse = res.getBody();
                 toShowInUI.apiEndpointURL = endpointURL;
                 toShowInUI.apiMethod = 'GET';
                 toShowInUI.apiStatusCode = String.valueOf(res.getStatusCode());
                 toShowInUI.apiRequest = apiRequest;
-                System.debug('res.getStatusCode() null: '+res.getStatusCode());
             }
+			
         }catch(Exception exp){
             System.debug('@@Exception Occurred : '+exp.getStackTraceString());
         }
-        
+        // returning a response
         return JSON.serialize(toShowInUI);
         
     }
