@@ -33,6 +33,35 @@ public class EventSubCategoryController {
             HttpResponse res = http.send(req);
             apiStatusCode = String.valueOf(res.getStatusCode()); // Storing status code in variable
             
+            //logic to convert json in object via wrapper when response is success.
+            if(res.getStatusCode() == 200){
+                //Wrapper to store data from response
+                EventSubCategoryWrapper subCatObj = (EventSubCategoryWrapper)System.JSON.deserialize(res.getBody(), EventSubCategoryWrapper.class);
+                List<EventSubCategoryWrapper.cls_subcategories> subCategoryList = subCatObj.subcategories;
+                List<EventToShowSubCatWrapper.subCategoryDetails> allSubcatList = new  List<EventToShowSubCatWrapper.subCategoryDetails>();
+                
+                for(EventSubCategoryWrapper.cls_subcategories sub : subCategoryList){
+                    EventToShowSubCatWrapper.subCategoryDetails eachSubcat = new  EventToShowSubCatWrapper.subCategoryDetails();
+                    eachSubcat.subId  = sub.Id; 
+                    eachSubcat.categoryName = sub.parent_category.name; 
+                    eachSubcat.subcategoryName  = sub.name; 
+                    eachSubcat.url = sub.resource_uri; 
+                    allSubcatList.add(eachSubcat);
+                }
+                //Storing values from response to show it in UI
+                toShowInUI.subcategories = allSubcatList;         
+                toShowInUI.apiResponse = res.getBody();
+                toShowInUI.apiEndpointURL = endpointURL;
+                toShowInUI.apiMethod = 'GET';
+                toShowInUI.apiStatusCode = apiStatusCode;
+                toShowInUI.apiRequest = apiRequest;
+            }else{
+                toShowInUI.apiResponse = res.getBody();
+                toShowInUI.apiEndpointURL = endpointURL;
+                toShowInUI.apiMethod = 'GET';
+                toShowInUI.apiStatusCode = String.valueOf(res.getStatusCode());
+                toShowInUI.apiRequest = apiRequest;
+            }
         }catch(Exception exp){
             System.debug('@@Exception Occurred : '+exp.getStackTraceString());
         }
