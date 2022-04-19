@@ -1,5 +1,6 @@
 <template>
     <lightning-card>
+	<!-- Taken from https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/example : Salesforce Licence -->
         <div class="slds-text-heading_large slds-align_absolute-center">List of Sub Category Events</div><br/><br/>
         <div class="slds-p-horizontal_medium textAlign">
             <div class="slds-grid slds-gutters">
@@ -51,7 +52,33 @@
                                 </div>
                             </div>  
                         </lightning-accordion-section>
-                        
+                        <lightning-accordion-section name="B" label="API Response">
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Response</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Response</span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Status Code:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiStatusCode}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Response:</b> <lightning-formatted-rich-text value={subcategoriesDetails.apiResponse}></lightning-formatted-rich-text></p>
+                                </div>
+                            </div>  
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+				</div>
 			</template>
 		</div>
 	</lightning-card>
