@@ -142,6 +142,46 @@ export default class EventUpdate extends LightningElement {
     }
 
 
+    // function to do server call with class EventUpdateController to perform POST method of API to get update event details.
+    handleUpdateEvent(event){
+        
+        this.isOrgIdAvailable = false; // to hide the organization API details in UI
+        if(this.eventId != '' && this.eventId != undefined && this.eventId != null){
+        let eventDetails =[];
+        eventDetails.push({eventName:this.eventName,eventDescription:this.eventDescription,
+                    startDateTime:this.setStartTime,endDateTime:this.setEndTime,password:this.password,capacity:this.capacity,
+                    eventSeatMapValue:this.eventSeatMapValue,eventSeatValue:this.eventSeatValue,eventSeriesValue:this.eventSeriesValue,
+                    eventSelectSeatValue:this.eventSelectSeatValue,currencys:this.currency,locale:this.locale,
+                    eventOnlineValue:this.eventOnlineValue,eventShareableValue:this.eventShareableValue,eventInviteValue:this.eventInviteValue,
+                    organizerId:this.organizerId,eventRemaningValue:this.eventRemaningValue,eventListedValue:this.eventListedValue,eventColorValue:this.eventColorValue,timeZone:this.timeZone});
+        
+        this.eventObject = JSON.stringify(eventDetails); //Converion to string 
+            updateEvent({
+                eventDataInfo : this.eventObject, //sending string parameter
+                eventId : this.eventId // sending event Id to update details
+            }).then(result => {
+                if(result != '' && result != null && result != undefined){
+                    const createdEventData = JSON.parse(result) // Parsing JSON to Object 
+                    this.createdEventDetails = createdEventData;
+                    this.isCreateEventAvailable= this.createdEventDetails.apiStatusCode == '200' ? true : false ; // showing both event and API details
+                    this.isCreateEventError= this.createdEventDetails.apiStatusCode == '200' ? false : true ;  // showing error API details only 
+                }else{
+                    this.isCreateEventAvailable= false;
+                    this.isCreateEventError = false
+                    this.createdEventDetails = [];
+                }
+            }).catch(error => {
+                this.isCreateEventAvailable= false;
+                this.isCreateEventError= false;
+                this.createdEventDetails = [];
+                this.showToastMessage('Error!','Error',error.body.message); // calling function of showMessage
+            });
+            }else{
+                this.showMessage('Error!','Error','Please Enter Event Id to update details');
+            }
+        
+    }
+
     // dunction to get event details from server
     handleEventDetails(){
         console.log('this.eventId : '+this.eventId)
@@ -168,6 +208,15 @@ export default class EventUpdate extends LightningElement {
             this.showMessage('Error!','Error',error.body.message);
         });
        
+    }
+
+    showMessage(header,type,msg) {
+            const event = new ShowToastEvent({
+                title: header,
+                variant: type,
+                message: msg
+            });
+            this.dispatchEvent(event);
     }
 
 }
