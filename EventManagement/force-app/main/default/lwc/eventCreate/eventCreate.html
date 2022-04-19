@@ -1,169 +1,276 @@
 <template>
-<lightning-card>
-     <div class="slds-text-heading_large slds-align_absolute-center">Create an Event</div><br/><br/>
+    <lightning-card>
+        <div class="slds-text-heading_large slds-align_absolute-center">Create an Event</div><br/><br/>
         <div class="slds-p-horizontal_medium textAlign">
             <div class="slds-grid slds-gutters">
-                    <div class="slds-col slds-size_1-of-2">
-                    <lightning-input name="EventName" class="verify" type="text" required label="Event Name:" value={eventName} onchange={handleEventNameChange}></lightning-input>
-                    <lightning-input name="StartTime" class="verify" required type="datetime" label="Start Time:" value={startDateTime} onchange={handleEventStartTimeChange}></lightning-input>
-                   <lightning-input name="Capacity" class="verify" required type="number" label="Capacity:" value={capacity} onchange={handleEventCapacityChange}></lightning-input>
-                     <lightning-textarea name="EventDescription" class="verify" required type="text" label="Event Description:" value={eventDescription} onchange={handleEventDesChange}></lightning-textarea>
-                     <lightning-input name="IsReservedSeating"  type="checkbox" label="Is Reserved Seating:" checked onchange={handleEventSeatChange}></lightning-input>
-                     <lightning-input name="IsSeries" type="checkbox" label="Is Series:" checked onchange={handleEventSeriesChange}></lightning-input>
-                     <lightning-input name="ShowPickaSeat" type="checkbox" label="Show Pick a Seat:" checked onchange={handleEventSelectSeatChange}></lightning-input>
-                    <lightning-input name="ShowSeatmapThumbnail" type="checkbox" label="Show Seatmap Thumbnail:" checked onchange={handleEventSeatMapChange}></lightning-input>
-                     <lightning-input name="ShowColorsInSeatmapThumbnail" type="checkbox" label="Show Colors In Seatmap Thumbnail:" checked  onchange={handleEventColorChange}></lightning-input>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input name="EventName" class="eventName" type="text" required label="Event Name:" value={eventName} onchange={handleEventNameChange}></lightning-input>
+                    <lightning-input name="Capacity" type="number" label="Capacity:" value={capacity} onchange={handleEventCapacityChange}></lightning-input>
+                    <lightning-input name="StartTime"  class="startTime" required type="datetime" label="Start Time:" value={startDateTime} onchange={handleEventStartTimeChange}></lightning-input>
+                    <lightning-textarea name="EventDescription" type="text" label="Event Description:" value={eventDescription} onchange={handleEventDesChange}></lightning-textarea>
+                    <lightning-input name="IsReservedSeating"  type="checkbox" label="Is Reserved Seating:" onchange={handleEventSeatChange}></lightning-input>
+                    <lightning-input name="IsSeries" type="checkbox" label="Is Series:" onchange={handleEventSeriesChange}></lightning-input>
+                    <lightning-input name="ShowPickaSeat" type="checkbox" label="Show Pick a Seat:" onchange={handleEventSelectSeatChange}></lightning-input>
+                    <lightning-input name="ShowSeatmapThumbnail" type="checkbox" label="Show Seatmap Thumbnail:" onchange={handleEventSeatMapChange}></lightning-input>
+                    <lightning-input name="ShowColorsInSeatmapThumbnail" type="checkbox" label="Show Colors In Seatmap Thumbnail:"  onchange={handleEventColorChange}></lightning-input>
+                    <lightning-input name="InviteOnly" type="checkbox" label="Invite Only:" onchange={handleEventInviteChange}></lightning-input>
+                    <lightning-input name="ShowRemaining" type="checkbox" label="Show Remaining:" checked onchange={handleEventRemaningChange}></lightning-input>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input name="Currency" class="currency" required type="text" label="Currency (USD):" value={currency} onchange={handleEventCurrencyChange}></lightning-input>
+                    <lightning-input name="Locale" type="text" label="Locale (de_AT):" value={locale} onchange={handleEventLocaleChange}></lightning-input>
+                    <lightning-input name="EndTime"  class="endtime" min={startDateTime}  required type="datetime" label="End Time:" value={endDateTime} onchange={handleEventEndTimeChange}></lightning-input>
+                    <lightning-input name="Password"  type="text" label="Password:" value={password} onchange={handleEventPasswordChange}></lightning-input>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2">  
+                            <lightning-input name="OrganizationId" class="organizationId" required type="text" label="Organization Id:" onchange={handleEventOrgIdChange} value={organizationId}> </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2" style="margin-top: 24px;">  
+                            <lightning-button variant="brand-outline" label="Get Organization Id"  onclick={handleOrganizationId} title="Get Organization Id" icon-name="utility:search" class="slds-m-left_x-small"></lightning-button>
+                        </div>
                     </div>
+                    <lightning-input name="OrganizerId" type="text" label="Organizer Id (45462715823):" value={organizerId} onchange={handleEventOrgnizerChange}></lightning-input>
+                    <lightning-input name="OnlineEvent" type="checkbox" label="Online Event:"  onchange={handleEventOnlineChange}></lightning-input>
+                    <lightning-input name="Listed" type="checkbox" label="Listed:"  onchange={handleEventListedChange}></lightning-input>
+                    <lightning-input name="Shareable" type="checkbox" label="Shareable:" onchange={handleEventShareableChange}></lightning-input>
                     
-                    
-                    <div class="slds-col slds-size_1-of-2">
-                        <lightning-input name="Currency" class="verify" required type="text" label="Currency:" value={currency} onchange={handleEventCurrencyChange}></lightning-input>
-                        <lightning-input name="EndTime" class="verify" required type="datetime" label="End Time:" value={endDateTime} onchange={handleEventEndTimeChange}></lightning-input>
-                        <lightning-input name="Locale" class="verify" required type="text" label="Locale:" value={locale} onchange={handleEventLocaleChange}></lightning-input>
-                        <div class="slds-grid slds-wrap">
-                            <div class="slds-col slds-size_1-of-2">  
-                                <lightning-input name="OrganizationId" class="verify" required type="text" label="Organization Id:" onchange={handleEventOrgIdChange} value={organizationId}> </lightning-input>
-                            </div>
-                            <div class="slds-col slds-size_1-of-2" style="margin-top: 24px;">  
-                                <lightning-button variant="brand-outline" label="Get Organization Id" onclick={handleOrganizationId} title="Get Organization Id" icon-name="utility:search" class="slds-m-left_x-small"></lightning-button>
-                            </div>
-                        </div>
-                        <lightning-input name="OnlineEvent" type="checkbox" label="Online Event:"  onchange={handleEventOnlineChange}></lightning-input>
-                        <lightning-input name="Listed" type="checkbox" label="Listed:"  onchange={handleEventListedChange}></lightning-input>
-                        <lightning-input name="Shareable" type="checkbox" label="Shareable:" onchange={handleEventShareableChange}></lightning-input>
-                        <lightning-input name="InviteOnly" type="checkbox" label="Invite Only:" onchange={handleEventInviteChange}></lightning-input>
-                        <lightning-input name="ShowRemaining" type="checkbox" label="Show Remaining:" checked onchange={handleEventRemaningChange}></lightning-input>
-                     </div>
-            </div>
-            <div class="slds-align_absolute-center">
-                <div class="slds-grid slds-wrap ">
-                        <div class="slds-col slds-size_1-of-1">
-                            <lightning-button class="buttonset" variant="Success" label="Create Event"
-                            title="Get Event Details" icon-name="utility:record_create" 
-                            icon-position="right" onclick={handleCreateEvent} ></lightning-button>
-                        </div>
                 </div>
             </div>
-
-           <template if:true={isCreateEventAvailable}>
-                </br><h2 class="slds-card__header-title">
-                    <span><b>Organization Id API Details</b></span>
-                </h2>
-                        <lightning-accordion class="example-accordion"
-                        active-section-name="A">
+            </br>
+			<div class="slds-align_absolute-center">
+				<div class="slds-grid slds-wrap ">
+					<div class="slds-col slds-size_1-of-1">
+						<lightning-button class="buttonset" variant="Success" label="Create Event" title="Get Event Details" icon-name="utility:record_create" 
+							icon-position="right" onclick={handleCreateEvent} ></lightning-button></br></br>
+					</div>
+				</div>
+                <br/><br/>
+			</div>
+        
+			<template if:true={isOrgIdAvailable}>
+				<div class="slds-card">
+                    <h2 class="slds-p-horizontal_medium slds-p-top_x-small slds-card__header-title">
+                        <span><b>Organization Id API Details</b></span>
+                    </h2>
+                    <!-- Taken from https://developer.salesforce.com/docs/component-library/bundle/lightning:accordion -->
+                    <lightning-accordion class="example-accordion" active-section-name="A">
                         <lightning-accordion-section name="A" label="API Request">
-                          <article class="slds-card">
-                            <div class="slds-card__header slds-grid">
-                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                                <div class="slds-media__figure">
-                                <span class="slds-icon_container slds-icon-standard-account" title="API Request">
-                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                                    </svg>
-                                    <span class="slds-assistive-text">API Request</span>
-                                </span>
+                            <!-- Taken from https://www.lightningdesignsystem.com/components/cards/https://www.lightningdesignsystem.com/components/cards/ -->
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Request</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Request</span>
+                                            </h2>
+                                        </div>
+                                    </header>
                                 </div>
-                                <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <span>API Request</span>
-                                </h2>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Endpoint URL:</b> <lightning-formatted-rich-text value={orgUserDetails.apiEndpointURL}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Method:</b> <lightning-formatted-text value={orgUserDetails.apiMethod}></lightning-formatted-text></p>
+                                    <p class=""><b>Request:</b> <lightning-formatted-rich-text value={orgUserDetails.apiRequest}></lightning-formatted-rich-text></p>
                                 </div>
-                            </header>
-                            </div>
-                            <div class="">
-                                <p class=""><b>Endpoint URL:</b> {orgUserDetails.apiEndpointURL}</p>
-                                <p class=""><b>Method:</b> {orgUserDetails.apiMethod}</p>
-                                <p class=""><b>Request:</b> {orgUserDetails.apiRequest}</p>
-                            </div>
-                        </article>  
+                            </div>  
                         </lightning-accordion-section>
                         <lightning-accordion-section name="B" label="API Response">
-                          <article class="slds-card">
-                            <div class="slds-card__header slds-grid">
-                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                                <div class="slds-media__figure">
-                                <span class="slds-icon_container slds-icon-standard-account" title="API Response">
-                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                                    </svg>
-                                    <span class="slds-assistive-text">API Response</span>
-                                </span>
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Response</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Response</span>
+                                            </h2>
+                                        </div>
+                                    </header>
                                 </div>
-                                <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <span>API Response</span>
-                                </h2>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Status Code:</b> <lightning-formatted-rich-text value={orgUserDetails.apiStatusCode}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Response:</b> <lightning-formatted-rich-text value={orgUserDetails.apiResponse}></lightning-formatted-rich-text></p>
                                 </div>
-                            </header>
-                            </div>
-                            <div class="slds-card__body slds-card__body_inner">
-                                <p class=""><b>Status Code:</b> {orgUserDetails.apiStatusCode}</p>
-                                <p class=""><b>Response:</b> {orgUserDetails.apiResponse}</p>
-                            </div>
-                        </article>  
+                            </div>  
                         </lightning-accordion-section>
-                        </lightning-accordion>
-            </template>
+                    </lightning-accordion>
+				</div>
+			</template>
+			
+			<template if:true={isCreateEventAvailable}>
+                <div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="Event Details">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">Event Details</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>Event Details</span>
+                                                
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Event Id:</b> <lightning-formatted-text value={createdEventDetails.eventId} ></lightning-formatted-text></p>
+                                    <p class=""><b>Event Name:</b><lightning-formatted-rich-text value={createdEventDetails.eventName}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Venue Id:</b><lightning-formatted-text value={createdEventDetails.venue_id}></lightning-formatted-text></p>
+                                    <p class=""><b>Organization Id:</b><lightning-formatted-text value={createdEventDetails.organization_id}></lightning-formatted-text></p>
+                                    <p class=""><b>Description:</b><lightning-formatted-rich-text value={createdEventDetails.description}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Event Status:</b><lightning-formatted-text value={createdEventDetails.status}></lightning-formatted-text></p>
+                                    <p class=""><b>Currency:</b><lightning-formatted-text value={createdEventDetails.currencys}></lightning-formatted-text></p>
+                                    <p class=""><b>Summary:</b><lightning-formatted-rich-text value={createdEventDetails.summary}></lightning-formatted-rich-text></p>
+                                    <p class=""><b>Start Time:</b><lightning-formatted-text value={createdEventDetails.startTime}></lightning-formatted-text></p>
+                                    <p class=""><b>End Time:</b><lightning-formatted-text value={createdEventDetails.endTime}></lightning-formatted-text></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">   
+                            <h2 class="slds-p-horizontal_medium slds-p-top_x-small slds-card__header-title">
+                                <span><b>API Details</b></span>
+                            </h2>
+                            <lightning-accordion class="example-accordion"
+                                                active-section-name="A">
+                                <lightning-accordion-section name="A" label="API Request">
+                                    <div class="slds-card">
+                                        <div class="slds-card__header slds-grid">
+                                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                <div class="slds-media__figure">
+                                                    <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                        </svg>
+                                                        <span class="slds-assistive-text">API Request</span>
+                                                    </span>
+                                                </div>
+                                                <div class="slds-media__body">
+                                                    <h2 class="slds-card__header-title">
+                                                        <span>API Request</span>
+                                                    </h2>
+                                                </div>
+                                            </header>
+                                        </div>
+                                        <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                            <p class=""><b>Endpoint URL:</b><lightning-formatted-rich-text value={createdEventDetails.apiEndpointURL}></lightning-formatted-rich-text></p>
+                                            <p class=""><b>Method:</b> <lightning-formatted-text value={createdEventDetails.apiMethod}></lightning-formatted-text></p>
+                                            <p class=""><b>Request:</b> <lightning-formatted-rich-text value={createdEventDetails.apiRequest}></lightning-formatted-rich-text></p>
+                                        </div>
+                                    </div>  
+                                </lightning-accordion-section>
+                                <lightning-accordion-section name="B" label="API Response">
+                                    <div class="slds-card">
+                                        <div class="slds-card__header slds-grid">
+                                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                <div class="slds-media__figure">
+                                                    <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                        </svg>
+                                                        <span class="slds-assistive-text">API Response</span>
+                                                    </span>
+                                                </div>
+                                                <div class="slds-media__body">
+                                                    <h2 class="slds-card__header-title">
+                                                        <span>API Response</span>
+                                                    </h2>
+                                                </div>
+                                            </header>
+                                        </div>
+                                        <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                            <p class=""><b>Status Code:</b> <lightning-formatted-text value={createdEventDetails.apiStatusCode}></lightning-formatted-text></p>
+                                            <p class=""><b>Response:</b><lightning-formatted-rich-text value={createdEventDetails.apiResponse}></lightning-formatted-rich-text></p>
+                                        </div>
+                                    </div>  
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+                        </div>
+                    </div>
+                </div>
+			</template>
 
-            <template if:true={isOrgIdAvailable}>
-                </br><h2 class="slds-card__header-title">
-                    <span><b>Create Event API Details</b></span>
-                </h2>
-                        <lightning-accordion class="example-accordion"
-                        active-section-name="A">
+			<template if:true={isCreateEventError}>
+                <div class="slds-card">
+                    <h2 class="slds-p-horizontal_medium slds-p-top_x-small slds-card__header-title">
+                        <span><b>Create Event API Details</b></span>
+                    </h2>
+                    <lightning-accordion class="example-accordion" active-section-name="A">
                         <lightning-accordion-section name="A" label="API Request">
-                          <article class="slds-card">
-                            <div class="slds-card__header slds-grid">
-                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                                <div class="slds-media__figure">
-                                <span class="slds-icon_container slds-icon-standard-account" title="API Request">
-                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                                    </svg>
-                                    <span class="slds-assistive-text">API Request</span>
-                                </span>
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Request</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Request</span>
+                                            </h2>
+                                        </div>
+                                    </header>
                                 </div>
-                                <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <span>API Request</span>
-                                </h2>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Endpoint URL:</b> {createdEventDetails.apiEndpointURL}</p>
+                                    <p class=""><b>Method:</b> {createdEventDetails.apiMethod}</p>
+                                    <p class=""><b>Request:</b> {createdEventDetails.apiRequest}</p>
                                 </div>
-                            </header>
-                            </div>
-                            <div class="">
-                                <p class=""><b>Endpoint URL:</b> {orgUserDetails.apiEndpointURL}</p>
-                                <p class=""><b>Method:</b> {orgUserDetails.apiMethod}</p>
-                                <p class=""><b>Request:</b> {orgUserDetails.apiRequest}</p>
-                            </div>
-                        </article>  
+                            </div>  
                         </lightning-accordion-section>
                         <lightning-accordion-section name="B" label="API Response">
-                          <article class="slds-card">
-                            <div class="slds-card__header slds-grid">
-                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                                <div class="slds-media__figure">
-                                <span class="slds-icon_container slds-icon-standard-account" title="API Response">
-                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                                    </svg>
-                                    <span class="slds-assistive-text">API Response</span>
-                                </span>
+                            <div class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">API Response</span>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span>API Response</span>
+                                            </h2>
+                                        </div>
+                                    </header>
                                 </div>
-                                <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <span>API Response</span>
-                                </h2>
+                                <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                    <p class=""><b>Status Code:</b> {createdEventDetails.apiStatusCode}</p>
+                                    <p class=""><b>Response:</b> {createdEventDetails.apiResponse}</p>
                                 </div>
-                            </header>
-                            </div>
-                            <div class="slds-card__body slds-card__body_inner">
-                                <p class=""><b>Status Code:</b> {orgUserDetails.apiStatusCode}</p>
-                                <p class=""><b>Response:</b> {orgUserDetails.apiResponse}</p>
-                            </div>
-                        </article>  
+                            </div>  
                         </lightning-accordion-section>
-                        </lightning-accordion>
-            </template>
-        </div>
-</lightning-card>
+                    </lightning-accordion>
+                </div>
+			</template>
+		</div>
+	</lightning-card>
 </template>
