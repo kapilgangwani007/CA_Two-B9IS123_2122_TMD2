@@ -20,5 +20,30 @@ public class EventShowWrapper {
     public String apiRequest;
     public String userId;
     public String userName;
-    
+    public EventShowWrapper(){}
+    public EventShowWrapper(String eventName, String description, String startTime, String endTime,
+                            String url, String status, String currencys, String summary,
+                            String venue_id, String organization_id, String eventId,
+                            String apiResponse, String apiEndpointURL, String apiMethod, String apiStatusCode,
+                            String apiRequest, String userId, String userName ){
+                                
+                                this.eventName = eventName;
+                                this.description = description;
+                                this.startTime = startTime;
+                                this.endTime = endTime;
+                                this.url = url;
+                                this.status = status;
+                                this.currencys = currencys;
+                                this.summary = summary;
+                                this.venue_id = venue_id;
+                                this.organization_id = organization_id;
+                                this.eventId = eventId;
+                                this.apiResponse = apiResponse;
+                                this.apiEndpointURL = apiEndpointURL;
+                                this.apiMethod = apiMethod;
+                                this.apiStatusCode = apiStatusCode;
+                                this.apiRequest = apiRequest;
+                                this.userId = userId;
+                                this.userName = userName;    
+                            }
 }
