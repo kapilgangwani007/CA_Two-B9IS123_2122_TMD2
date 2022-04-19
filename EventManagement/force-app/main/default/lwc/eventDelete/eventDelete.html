@@ -1,0 +1,87 @@
+<template>
+    <lightning-card>
+        <div class="slds-text-heading_large slds-align_absolute-center">Delete an Event</div><br/><br/>
+            <div class="slds-p-horizontal_medium textAlign">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-6">
+                        <lightning-input type="text" label="Enter Event Id:" value={eventId} onchange={handleEventIdChange}></lightning-input>
+                    </div>
+                    <template if:true={eventId}>
+                        <div class="slds-col slds-size_1-of-6" style="margin-top: 5px;">
+                            <br/>
+                            <lightning-button variant="Success" label="Delete Event"
+                            title="Delete Event" icon-name="utility:delete" 
+                            icon-position="right" onclick={handleEventDelete} ></lightning-button>
+                        </div>
+                            <div class="slds-col slds-size_1-of-6" style="margin-top: 5px;">
+                            <br/><lightning-button variant="destructive" style="margin-left: -67px;" label="Reset" title="Reset Filters" icon-name="utility:refresh" icon-position="right" onclick={resetAll} ></lightning-button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <template if:true={isEventAvailable}>
+                <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-1">   
+                    <div class="slds-card">
+                        <h2 class="slds-p-horizontal_medium slds-card__header-title">
+                            <span><b>API Details</b></span>
+                        </h2>
+                        <lightning-accordion class="example-accordion" active-section-name="A">
+                            <lightning-accordion-section name="A" label="API Request">
+                                <div class="slds-card">
+                                    <div class="slds-card__header slds-grid">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__figure">
+                                                <span class="slds-icon_container slds-icon-standard-account" title="API Request">
+                                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                        <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                    </svg>
+                                                    <span class="slds-assistive-text">API Request</span>
+                                                </span>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <span>API Request</span>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                        <p class=""><b>Endpoint URL:</b><lightning-formatted-rich-text value={eventDetails.apiEndpointURL}></lightning-formatted-rich-text></p>
+                                        <p class=""><b>Method:</b> <lightning-formatted-text value={eventDetails.apiMethod}></lightning-formatted-text></p>
+                                        <p class=""><b>Request:</b> <lightning-formatted-rich-text value={eventDetails.apiRequest}></lightning-formatted-rich-text></p>
+                                    </div>
+                                </div>  
+                            </lightning-accordion-section>
+                            <lightning-accordion-section name="B" label="API Response">
+                                <div class="slds-card">
+                                    <div class="slds-card__header slds-grid">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__figure">
+                                                <span class="slds-icon_container slds-icon-standard-account" title="API Response">
+                                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                        <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                    </svg>
+                                                    <span class="slds-assistive-text">API Response</span>
+                                                </span>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <span>API Response</span>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-p-horizontal_medium  slds-card__body slds-card__body_inner">
+                                        <p class=""><b>Status Code:</b> <lightning-formatted-text value={eventDetails.apiStatusCode}></lightning-formatted-text></p>
+                                        <p class=""><b>Response:</b><lightning-formatted-rich-text value={eventDetails.apiResponse}></lightning-formatted-rich-text></p>
+                                    </div>
+                                </div>  
+                            </lightning-accordion-section>
+                        </lightning-accordion>
+                </div>
+                    </div>
+                </div>
+            </template>
+ </lightning-card>
+</template>

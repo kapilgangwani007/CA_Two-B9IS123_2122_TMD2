@@ -1,0 +1,18 @@
+.buttonset{
+	margin-right: 85px;
+    width: 140px;
+}
+
+.slds-card {
+	border: var(--slds-c-card-sizing-border,var(--sds-c-card-sizing-border,1px)) solid var(--slds-c-card-color-border,var(--sds-c-card-color-border,#c9c9c9));
+    border-radius: var(--slds-c-card-radius-border,var(--sds-c-card-radius-border,.25rem));
+}
+
+.textAlign{
+	line-height: 25px;
+}
+
+.eventset{
+	padding-top: 30px;
+	padding-left: 28px;
+}
