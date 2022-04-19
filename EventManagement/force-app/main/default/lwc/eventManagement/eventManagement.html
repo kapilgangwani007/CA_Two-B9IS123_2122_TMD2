@@ -4,6 +4,7 @@
         <div class="slds-p-horizontal_medium textAlign">
             <div class="slds-grid slds-gutters">
                     <div class="slds-col slds-size_1-of-6">
+                     <!-- Taken from https://developer.salesforce.com/docs/component-library/bundle/lightning-input -->
                         <lightning-input type="text" label="Enter Event Id:" value={eventId} onchange={handleEventIdChange}></lightning-input>
                     </div>
                 <template if:true={eventId}>
@@ -44,6 +45,8 @@
      <template if:true={isEventAvailable}>
              <div class="slds-grid slds-gutters">
                     <div class="slds-p-horizontal_medium slds-col slds-size_6-of-12 eventset textAlign">
+                     
+                     <!-- Taken from https://www.lightningdesignsystem.com/components/cards/ -->
                         <div class="slds-card">
                             <div class="slds-card__header slds-grid">
                             <header class="slds-media slds-media_center slds-has-flexi-truncate">
