@@ -1,0 +1,23 @@
+<template>
+    <lightning-card>
+        <div class="slds-text-heading_large slds-align_absolute-center">List of Sub Category Events</div><br/><br/>
+        <div class="slds-p-horizontal_medium textAlign">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-1">
+                    <!-- Taken From https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/example -->
+                    <lightning-datatable
+                        key-field="id"
+                        data={tableData}
+                        columns={columns}
+                        show-row-number-column
+                        hide-checkbox-column
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirection}
+                        sorted-by={sortedBy}
+                        onsort={onHandleSort}>
+					</lightning-datatable>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

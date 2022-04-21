@@ -102,4 +102,14 @@ public class EventManagementController {
         return JSON.serialize(toShowInUI);
         
     }
+    
+    //Used to get the list of events stored in database.
+    @AuraEnabled
+    public static List<Event_Management__c> getEventsList(){
+        System.debug('Get List');
+        
+     List<Event_Management__c> eventList = [Select Id,Name,Name_Link__c ,Event_Name__c,Event_Site__c,Event_Status__c,Event_Description__c FROM Event_Management__c];
+    System.debug('eventList'+eventList);
+        return eventList;
+            }
 }
